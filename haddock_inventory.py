@@ -25,7 +25,11 @@ def inventory_from_index(project, version, index_json):
     return inv
 
 def haddock_inventory(project, version, haddock_dir):
-    with open(os.path.join(haddock_dir, 'doc-index.json')) as doc_index:
+    index_path = os.path.join(haddock_dir, 'doc-index.json')
+    if not os.path.exists(index_path):
+        print("'doc-index.json' not present in Haddock dir")
+        sys.exit(1)
+    with open(index_path) as doc_index:
         index_json = json.load(doc_index)
 
     inv = inventory_from_index(project, version, index_json)
