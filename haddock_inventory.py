@@ -7,12 +7,14 @@ def objects_from_index(index_json):
 
     modules = set()
     entries = []
-    for item in indexJson:
-        entry = soi.DataObjStr(name=item['name'], domain='hs', role='whatever', priority='1', uri=item['link'], dispname='-')
-        entries.append(entry)
-        modules.add(item['module'])
+    for item in index_json:
+        for name in item['name'].split(' '):
+            module = item['module']
+            entry = soi.DataObjStr(name="{}.{}".format(module, name), domain='hs', role='hstype', priority='1', uri=item['link'], dispname=name)
+            entries.append(entry)
+            modules.add(module)
     for mod in modules:
-        entry = soi.DataObjStr(name=mod, domain='hs', role='module', priority='1', uri="{}.html".format(mod), dispname='-')
+        entry = soi.DataObjStr(name=mod, domain='hs', role='hsmod', priority='1', uri="{}.html".format(mod), dispname='-')
         entries.append(entry)
 
     return entries
@@ -21,7 +23,7 @@ def inventory_from_index(project, version, index_json):
     inv = soi.Inventory()
     inv.project = project
     inv.version = version
-    inv.objects.extend(haddock_objects(index_json))
+    inv.objects.extend(objects_from_index(index_json))
     return inv
 
 def haddock_inventory(project, version, haddock_dir):
@@ -38,4 +40,4 @@ def haddock_inventory(project, version, haddock_dir):
     soi.writebytes(os.path.join(haddock_dir, 'objects.inv'), ztext)
 
 if __name__ == "__main__":
-    haddock_inventory(sys.argv[1:])
+    haddock_inventory("", "", sys.argv[1])
