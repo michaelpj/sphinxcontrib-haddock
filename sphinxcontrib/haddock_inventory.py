@@ -39,5 +39,5 @@ def haddock_inventory(project, version, haddock_dir):
     ztext = soi.compress(text)
     soi.writebytes(os.path.join(haddock_dir, 'objects.inv'), ztext)
 
-if __name__ == "__main__":
+def main():
     haddock_inventory("", "", sys.argv[1])

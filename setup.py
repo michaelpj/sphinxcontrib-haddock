@@ -20,4 +20,5 @@ setup(
     packages=find_packages(),
     install_requires=requires,
     namespace_packages=['sphinxcontrib'],
+    entry_points={"console_scripts": ["haddock_inventory = sphinxcontrib.haddock_inventory:main"]},
 )
