@@ -6,11 +6,14 @@ def hs_domain():
         label = "Haskell",
 
         elements = dict(
-            hstype = dict(
-                objname = "Haskell Type",
+            hsobj = dict(
+                objname = "Haskell entity",
             ),
-            hsfun = dict(
-                objname = "Haskell Function",
+            hstype = dict(
+                objname = "Haskell type",
+            ),
+            hsval = dict(
+                objname = "Haskell value",
             ),
             hsmod = dict(
                 objname = "Haskell module",

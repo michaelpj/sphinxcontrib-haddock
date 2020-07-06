@@ -10,11 +10,11 @@ def objects_from_index(index_json):
     for item in index_json:
         for name in item['name'].split(' '):
             module = item['module']
-            entry = soi.DataObjStr(name="{}.{}".format(module, name), domain='hs', role='hstype', priority='1', uri=item['link'], dispname=name)
+            entry = soi.DataObjStr(name="{}.{}".format(module, name), domain='hs', role='hsobj', priority='1', uri=item['link'], dispname=name)
             entries.append(entry)
             modules.add(module)
     for mod in modules:
-        entry = soi.DataObjStr(name=mod, domain='hs', role='hsmod', priority='1', uri="{}.html".format(mod), dispname='-')
+        entry = soi.DataObjStr(name=mod, domain='hs', role='hsmod', priority='1', uri="{}.html".format(mod.replace('.','-')), dispname='-')
         entries.append(entry)
 
     return entries
