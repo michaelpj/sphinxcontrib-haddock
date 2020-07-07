@@ -1,6 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, pythonPackages ? pkgs.python35Packages }:
 rec {
-  sphobjinv = pkgs.python35.pkgs.callPackage ./sphobjinv.nix {};
-  sphinxcontrib-domaintools = pkgs.python35.pkgs.callPackage ./sphinxcontrib-domaintools.nix {};
-  sphinxcontrib-haddock = pkgs.python35.pkgs.callPackage ./sphinxcontrib-haddock.nix { inherit sphobjinv sphinxcontrib-domaintools; };
+  sphobjinv = pythonPackages.callPackage ./sphobjinv.nix {};
+  sphinxcontrib-domaintools = pythonPackages.callPackage ./sphinxcontrib-domaintools.nix {};
+  sphinxcontrib-haddock = pythonPackages.callPackage ./sphinxcontrib-haddock.nix { inherit sphobjinv sphinxcontrib-domaintools; };
 }
